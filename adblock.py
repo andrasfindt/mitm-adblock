@@ -5,15 +5,15 @@ An mitmproxy adblock script!
 (c) 2015-2019 epitron
 """
 
-import re2
+import re
 from mitmproxy.script import concurrent
 from mitmproxy.http import HTTPResponse
 from adblockparser import AdblockRules
 from glob import glob
 
-IMAGE_MATCHER      = re2.compile(r"\.(png|jpe?g|gif)$")
-SCRIPT_MATCHER     = re2.compile(r"\.(js)$")
-STYLESHEET_MATCHER = re2.compile(r"\.(css)$")
+IMAGE_MATCHER      = re.compile(r"\.(png|jpe?g|gif)$")
+SCRIPT_MATCHER     = re.compile(r"\.(js)$")
+STYLESHEET_MATCHER = re.compile(r"\.(css)$")
 
 def log(msg):
     print(msg)
@@ -32,7 +32,7 @@ def combined(filenames):
 def load_rules(blocklists=None):
     rules = AdblockRules(
         combined(blocklists),
-        use_re2=True,
+        use_re2=False,
         max_mem=512*1024*1024
         # supported_options=['script', 'domain', 'image', 'stylesheet', 'object']
     )
